@@ -1,0 +1,7 @@
+*.aux
+*.toc
+*.log
+build
+compile_commands.json
+.clangd
+release

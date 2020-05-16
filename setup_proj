@@ -1,0 +1,47 @@
+#!/bin/bash
+set -e
+
+usage()
+{
+	printf "Usage: $0 [project format] -- create project\n"
+	printf "Project formats:\n"
+	printf "cpp -- cpp project\n"
+	printf "latex -- latex article\n"
+	printf "pres -- latex presentation\n"
+	printf "python -- python project\n"
+}
+
+if [ $# -ne 1 ];then
+	printf "Error: wrong number of parameters\n"
+	usage
+	exit 1
+fi
+
+NAME="$(basename $(readlink -f .))"
+
+case "$1" in 
+	"cpp" )
+		mkdir src
+		mkdir include
+		mkdir build
+		cp ~/.config/cpp/CMakeLists.txt .
+		cp ~/.config/cpp/.clang-format .
+		ln -s ./build/compile_commands.json compile_commands.json
+		;;
+	"latex" )
+		cp ~/.config/latex/article_template.tex "$NAME".tex
+		pdflatex "$NAME".tex > /dev/null
+		gvim "$NAME".tex
+		evince "$NAME".pdf &
+		;;
+	"pres" )
+		cp ~/.config/latex/pres_template.tex "$NAME".tex
+		pdflatex "$NAME".tex > /dev/null
+		gvim "$NAME".tex
+		evince "$NAME".pdf &
+		;;
+	* )
+		printf "Error: unknown format\n"
+		usage
+		exit 1
+esac

@@ -1,0 +1,8 @@
+[user]
+	email = vysotskiial@gmail.com
+	name = Alexey Vysotskiy
+[core]
+	excludesfile = /home/vysotskiial/.config/git/.gitignore
+	editor = vim
+[pull]
+	rebase = true
