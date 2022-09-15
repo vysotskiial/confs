@@ -1,6 +1,6 @@
 "Plugins
 
-call plug#begin("/home/vysotskiial/.local/share/nvim/plugged")
+call plug#begin()
 
 Plug 'ycm-core/YouCompleteMe'
 
@@ -8,13 +8,13 @@ Plug 'vim-latex/vim-latex'
 
 Plug 'lyokha/vim-xkbswitch'
 
-Plug 'donRaphaco/neotex', { 'for': 'tex' }
-
-Plug 'rhysd/vim-clang-format'
-
-Plug 'jiangmiao/auto-pairs'
-
 Plug 'octol/vim-cpp-enhanced-highlight'
+
+Plug 'skywind3000/asyncrun.vim'
+
+Plug 'google/vim-maktaba'
+Plug 'google/vim-codefmt'
+Plug 'google/vim-glaive'
 
 call plug#end()
 
@@ -23,21 +23,23 @@ call plug#end()
 let g:XkbSwitchEnabled=1
 let g:XkbSwitchLib="/usr/local/lib/libxkbswitch.so"
 "tex plugins
-let g:Tex_Leader = '/'
+let g:Tex_Leader='/'
 let g:Tex_FoldedSections="Section"
 let g:Tex_FoldedEnvironments=""
-let g:Tex_FoldedMisc=""
-let g:neotex_enabled=2
+let g:Tex_FoldedMisc="preamble"
 let g:Tex_UseCiteCompletionVer2 = 0
-let g:clang_format#detect_style_file=1
-let g:clang_format#auto_format=1
+let g:tex_flavor='latex'
+
 let g:cpp_class_scope_highlight=1
-let g:chromatica#libclang_path='/usr/lib/llvm-10/lib'
-let g:chromatica#enable_at_startup=1
-let g:chromatica#responsive_mode=1
+
+au BufWritePost *.tex,*.bib :AsyncRun latexmk -pdf -outdir=result
+
+augroup autoformat_settings
+	autocmd Filetype c,cpp AutoFormatBuffer clang-format
+augroup END
 
 "Font
-set guifont=Liberation\ Mono\ 14
+set guifont=Deja\ Vu\ Sans\ Mono\ 14
 
 set signcolumn=no
 "Mouse
@@ -65,7 +67,7 @@ hi! link cppSTLfunction cFunction
 hi cppSTLconstant guifg=navajowhite
 hi cppSTLnamespace gui=bold guifg=darkkhaki
 hi cppSTLios guifg=navajowhite
-hi cString guifg=navajowhite
+hi String guifg=navajowhite
 hi SpecialChar guifg=#ffa0a0
 hi cIncluded guifg=#ffa0a0
 hi YCMInverse gui=underline
@@ -82,7 +84,7 @@ nnoremap j gj
 nnoremap k gk
 vnoremap j gj
 vnoremap k gk
-nnoremap <C-L> <C-W><C-L>
+inoremap <C-L> <Esc>
 nnoremap <C-H> <C-W><C-H>
 set backspace=indent,eol,start
 "Special chars
@@ -96,6 +98,8 @@ set nofoldenable
 " clipboard
 set clipboard=unnamedplus
 vnoremap p "0p
+nnoremap dd "_dd
+nnoremap x "_x
 " GUI
 set go-=m
 set go-=r
@@ -116,4 +120,6 @@ let g:ycm_filetype_whitelist = {
 let g:ycm_autoclose_preview_window_after_completion = 1
 nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nmap <leader>D <plug>(YCMHover)
+nnoremap <leader>f :YcmCompleter FixIt<CR>
 let g:ycm_auto_hover='no'
+let g:ycm_clangd_args=['--header-insertion=never']
