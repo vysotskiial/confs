@@ -23,7 +23,7 @@ call plug#end()
 let g:XkbSwitchEnabled=1
 let g:XkbSwitchLib="/usr/local/lib/libxkbswitch.so"
 "tex plugins
-let g:Tex_Leader='/'
+let g:Tex_Leader=';'
 let g:Tex_FoldedSections="Section"
 let g:Tex_FoldedEnvironments=""
 let g:Tex_FoldedMisc="preamble"
@@ -32,11 +32,20 @@ let g:tex_flavor='latex'
 
 let g:cpp_class_scope_highlight=1
 
-au BufWritePost *.tex,*.bib :AsyncRun latexmk -pdf -outdir=result
-
 augroup autoformat_settings
 	autocmd Filetype c,cpp AutoFormatBuffer clang-format
 augroup END
+
+command CM :AsyncRun -cwd=<root> cmake --build build
+command LM :AsyncRun -cwd=$(VIM_FILEDIR) latexmk -pdf -outdir=build
+
+"Function to check syntax group
+function! SynStack()
+  if !exists("*synstack")
+    return
+  endif
+  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc
 
 "Font
 set guifont=Deja\ Vu\ Sans\ Mono\ 14
@@ -61,6 +70,7 @@ hi NonText guifg=SlateGray guibg=grey20
 hi SpecialKey guifg=SlateGray
 hi Cursor guibg=snow3
 hi SignColumn guibg=grey20
+hi! link CursorLine Pmenu
 hi! link cFunction Normal
 hi! link cCustomFunc Normal
 hi! link cppSTLfunction cFunction
@@ -80,6 +90,8 @@ set ignorecase
 set nohls
 "Move
 set whichwrap+=<,>,h,l,[,]
+nnoremap gf <C-f>
+nnoremap gb <C-b>
 nnoremap j gj
 nnoremap k gk
 vnoremap j gj
@@ -111,10 +123,8 @@ let g:ycm_filetype_blacklist = { 'tex': 1 }
 let g:ycm_filetype_whitelist = {
 			\ "c":1,
 			\ "cpp":1,
-			\ "objc":1,
+			\ "cmake":1,
 			\ "sh":1,
-			\ "zsh":1,
-			\ "zimbu":1,
 			\ "python":1,
 			\ }
 let g:ycm_autoclose_preview_window_after_completion = 1
@@ -123,3 +133,5 @@ nmap <leader>D <plug>(YCMHover)
 nnoremap <leader>f :YcmCompleter FixIt<CR>
 let g:ycm_auto_hover='no'
 let g:ycm_clangd_args=['--header-insertion=never']
+set completeopt-=preview
+set pumheight=5
