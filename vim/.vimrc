@@ -52,7 +52,8 @@ hi SignColumn guibg=grey19
 hi clear Function
 hi String guifg=navajowhite
 hi SpecialChar guifg=#ffa0a0
-hi clear YCMInverse
+hi YCMInverse gui=underline
+hi link CursorLine Pmenu
 "Tabs
 set tabstop=2
 set shiftwidth=2
@@ -68,6 +69,7 @@ nnoremap j gj
 nnoremap k gk
 vnoremap j gj
 vnoremap k gk
+vnoremap <C-L> <Esc>
 inoremap <C-L> <Esc>
 nnoremap <C-H> <C-W><C-H>
 set backspace=indent,eol,start
