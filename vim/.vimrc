@@ -73,6 +73,7 @@ vnoremap <C-L> <Esc>
 inoremap <C-L> <Esc>
 nnoremap <C-H> <C-W><C-H>
 set backspace=indent,eol,start
+set formatoptions-=cro
 "Special chars
 set list
 set listchars=tab:>\ ,trail:-

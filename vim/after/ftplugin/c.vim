@@ -1,5 +1,6 @@
 let g:cpp_class_scope_highlight=1
 AutoFormatBuffer clang-format
+set fo-=cro
 
 command CM :AsyncRun -cwd=<root> cmake --build build
 hi cCustomClassName gui=bold guifg=darkkhaki
