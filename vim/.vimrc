@@ -12,6 +12,8 @@ Plug 'octol/vim-cpp-enhanced-highlight'
 
 Plug 'skywind3000/asyncrun.vim'
 
+Plug 'embear/vim-localvimrc'
+
 Plug 'google/vim-maktaba'
 Plug 'google/vim-codefmt'
 Plug 'google/vim-glaive'
