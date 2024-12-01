@@ -14,6 +14,9 @@ export PATH=$PATH:/home/vysotskiial/git_commands
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
 
+set -o vi
+bind "C-N":vi-movement-mode
+
 # append to the history file, don't overwrite it
 shopt -s histappend
 
@@ -78,7 +81,6 @@ esac
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
-    alias python='python3'
     #alias dir='dir --color=auto'
     #alias vdir='vdir --color=auto'
 

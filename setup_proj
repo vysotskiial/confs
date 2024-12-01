@@ -19,7 +19,7 @@ fi
 
 NAME="$(basename $(readlink -f .))"
 
-case "$1" in 
+case "$1" in
 	"cpp" )
 		mkdir src
 		mkdir include
