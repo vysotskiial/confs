@@ -18,6 +18,8 @@ Plug 'google/vim-maktaba'
 Plug 'google/vim-codefmt'
 Plug 'google/vim-glaive'
 
+Plug 'christoomey/vim-tmux-navigator'
+
 call plug#end()
 
 "Plugin settings
@@ -29,6 +31,9 @@ let g:Tex_FoldedEnvironments=""
 let g:Tex_FoldedMisc=""
 let g:tex_flavor='latex'
 
+let &t_Cs = "\e[4:3m"
+let &t_Ce = "\e[4:0m"
+
 "Font
 set guifont=Deja\ Vu\ Sans\ Mono\ 14
 
@@ -36,6 +41,7 @@ set signcolumn=no
 "Mouse
 set mouse=a
 "Colors
+set termguicolors
 colo desert
 set number
 set gcr=a:blinkon0-Visual,i-ci:blinkon0-ver25
@@ -56,11 +62,14 @@ hi String guifg=navajowhite
 hi SpecialChar guifg=#ffa0a0
 hi YCMInverse gui=underline
 hi link CursorLine Pmenu
+hi! link MatchParen Visual
+hi SpellBad cterm=undercurl
 "Tabs
 set tabstop=2
 set shiftwidth=2
 set autoindent
 "Search
+set wildignorecase
 set ignorecase
 set nohls
 "Move
@@ -71,9 +80,8 @@ nnoremap j gj
 nnoremap k gk
 vnoremap j gj
 vnoremap k gk
-vnoremap <C-L> <Esc>
-inoremap <C-L> <Esc>
-nnoremap <C-H> <C-W><C-H>
+vnoremap <C-N> <Esc>
+inoremap <C-N> <Esc>
 set backspace=indent,eol,start
 set formatoptions-=cro
 "Special chars
@@ -81,7 +89,7 @@ set list
 set listchars=tab:>\ ,trail:-
 "Encoding
 set encoding=utf-8
-set fileencodings=utf-8
+set fileencodings=utf-8,cp1251
 " Отмена свертки блоков
 set nofoldenable
 " clipboard
@@ -101,5 +109,7 @@ let g:ycm_filetype_whitelist = {
 			\ }
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_auto_hover='no'
+let g:localvimrc_whitelist="/home/vysotskiial/work/.*"
+let g:localvimrc_sandbox=0
 set completeopt-=preview
 set pumheight=5
