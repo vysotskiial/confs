@@ -15,7 +15,9 @@ export PATH=$PATH:/home/vysotskiial/git_commands
 HISTCONTROL=ignoreboth
 
 set -o vi
-bind "C-N":vi-movement-mode
+bind "C-L":vi-movement-mode
+bind -m vi-command 'Control-J: clear-screen'
+bind -m vi-insert 'Control-J: clear-screen'
 
 # append to the history file, don't overwrite it
 shopt -s histappend
