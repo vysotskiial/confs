@@ -1,7 +1,7 @@
-set mainfont {{DejaVu Sans} 12}
+set mainfont {{Nimbus Sans L} 12}
 set textfont {{DejaVu Sans Mono} 14}
-set uifont {{DejaVu Sans} 12 bold}
-set tabstop 8
+set uifont {{DejaVu Sans} 12}
+set tabstop 2
 set findmergefiles 0
 set maxgraphpct 50
 set maxwidth 16
@@ -16,48 +16,49 @@ set hideremotes 0
 set showlocalchanges 1
 set datetimeformat {%Y-%m-%d %H:%M:%S}
 set limitdiffs 1
-set uicolor grey85
-set want_ttk 1
-set bgcolor white
-set fgcolor black
-set uifgcolor black
-set uifgdisabledcolor #999
-set colors {"#00ff00" red blue magenta darkgrey brown orange}
-set diffcolors {red "#00a000" blue}
-set mergecolors {red blue "#00ff00" purple brown "#009090" magenta "#808000" "#009000" "#ff0080" cyan "#b07070" "#70b0f0" "#70f0b0" "#f0b070" "#ff70b0"}
+set uicolor #3c3c3c
+set want_ttk 0
+set bgcolor #333333
+set fgcolor #ffffff
+set uifgcolor #888888
+set uifgdisabledcolor #888888
+set colors {#7f9f7f #cc9393 #8cd0d3 #dc8cc3 darkgrey brown #dfaf8f}
+set diffcolors {"#9c6363" "#5f7f5f" "#6ca0a3"}
+set mergecolors {#cc9393 #8cd0d3 #7f9f7f #dc8cc3 brown #009090 magenta #808000 #009000 #ff0080 cyan #b07070 #70b0f0 #70f0b0 #f0b070 #ff70b0}
 set markbgcolor #e0e0ff
-set diffcontext 3
-set selectbgcolor gray85
-set foundbgcolor yellow
-set currentsearchhitbgcolor orange
+set diffcontext 6
+set selectbgcolor #7b5f40
+set foundbgcolor #685f47
+set currentsearchhitbgcolor #874e27
 set extdifftool meld
 set perfile_attrs 0
-set headbgcolor #00ff00
+set headbgcolor #60b48a
 set headfgcolor black
-set headoutlinecolor black
-set remotebgcolor #ffddaa
-set tagbgcolor yellow
+set headoutlinecolor #3f3f3f
+set remotebgcolor #dfaf8f
+set tagbgcolor #f0dfaf
 set tagfgcolor black
-set tagoutlinecolor black
+set tagoutlinecolor #3f3f3f
 set reflinecolor black
 set filesepbgcolor #aaaaaa
-set filesepfgcolor black
+set filesepfgcolor #6a6a6a
 set linehoverbgcolor #ffff80
 set linehoverfgcolor black
 set linehoveroutlinecolor black
-set mainheadcirclecolor yellow
-set workingfilescirclecolor red
-set indexcirclecolor #00ff00
-set circlecolors {white blue gray blue blue}
-set linkfgcolor blue
-set circleoutlinecolor black
+set mainheadcirclecolor #ffff80
+set workingfilescirclecolor #a65050
+set indexcirclecolor #60b48a
+set circlecolors {white #6ca0a3 $bgcolor #6ca0a3 #6ca0a3}
+set linkfgcolor #6ca0a3
+set circleoutlinecolor #3f3f3f
+set diffbgcolors {{#333333} #333333}
 set web_browser xdg-open
-set geometry(main) 1920x1023+1928+31
+set geometry(main) 1920x1023+0+23
 set geometry(state) normal
-set geometry(topwidth) 1920
-set geometry(topheight) 225
-set geometry(pwsash0) "671 1"
-set geometry(pwsash1) "1007 1"
-set geometry(botwidth) 836
-set geometry(botheight) 793
+set geometry(topwidth) 1918
+set geometry(topheight) 352
+set geometry(pwsash0) "801 1"
+set geometry(pwsash1) "1145 1"
+set geometry(botwidth) 1399
+set geometry(botheight) 659
 set permviews {}
