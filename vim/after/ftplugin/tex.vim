@@ -1,7 +1,27 @@
 setlocal spell spelllang=ru,en_us
 
-command LM :AsyncRun -cwd=$(VIM_FILEDIR) latexmk
-command LMP :AsyncRun -cwd=$(VIM_FILEDIR) latexmk -pdf -outdir=build
+set textwidth=80
+let g:asyncrun_save = 1
+let g:pdf_viewer = "evince"
+
+function! OpenPdf(name)
+	let output = system('pgrep '. shellescape(g:pdf_viewer))
+	if empty(output)
+		execute "silent !". g:pdf_viewer . " " . a:name . "&"
+		redr!
+	endif
+endfunction
+
+function! LatexMake()
+	if filereadable("main.tex")
+		AsyncRun -post=call\ OpenPdf("main.pdf") latexmk main.tex
+	else
+		AsyncRun -post=call\ OpenPdf("%:p:r.pdf") latexmk
+	endif
+endfunction
+
+command LM :call LatexMake()
+command LMP :AsyncRun -cwd=$(VIM_FILEDIR) latexmk -pdf
 
 let g:Tex_Env_frame="
 	\\\begin{frame}[fragile]\<CR>
@@ -28,3 +48,21 @@ let g:Tex_Env_IO="
 		\\\end{tabular}\<CR>
 	\\\end{center}"
 call IMAP("EIO", g:Tex_Env_IO, 'tex')
+
+call IMAP(g:Tex_Leader.'[', '\lceil <++> \rfloor <++>', 'tex')
+
+let g:Tex_Env_cases="
+			\\\begin{cases}\<CR>
+			\<++>\<CR>
+			\\\end{cases}\<CR>
+			\<++>"
+call IMAP(g:Tex_Leader.'{', g:Tex_Env_cases, 'tex')
+
+let g:Tex_Env_DIS="
+	\Фрагмент диссертации (стр. <++>):\\\\\<CR>
+	\<++>\\\\\<CR>
+	\Ваш комментарий:\\\\\<CR>
+	\<++>\\\\\<CR>
+	\Мой комментарий:\\\\\<CR>
+	\<++>"
+call IMAP("EDI", g:Tex_Env_DIS, 'tex')
