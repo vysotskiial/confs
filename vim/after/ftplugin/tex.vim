@@ -5,6 +5,10 @@ let g:asyncrun_save = 1
 let g:pdf_viewer = "evince"
 
 function! OpenPdf(name)
+	if g:asyncrun_code != 0
+		copen
+		return
+	endif
 	let output = system('pgrep '. shellescape(g:pdf_viewer))
 	if empty(output)
 		execute "silent !". g:pdf_viewer . " " . a:name . "&"
