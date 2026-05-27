@@ -7,8 +7,6 @@ case $- in
     *i*) ;;
       *) return;;
 esac
-export CL_DIR=/home/vysotskiial/work/CL_DIR
-export PATH=$PATH:/home/vysotskiial/git_commands
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
@@ -127,7 +125,5 @@ bind 'set completion-ignore-case on'
 bind "TAB:menu-complete"
 export XDG_RUNTIME_DIR=/home/vysotskiial/.xdg_runtime
 export RUNLEVEL=3
-export LIBGL_ALWAYS_INDIRECT=1
 umask 0022
-export DISPLAY=$(ip route|awk '/^default/{print $3}'):0.0
 setxkbmap -model pc105 -layout us,ru -option grp:alt_shift_toggle

@@ -6,7 +6,7 @@ cp .bashrc ..
 cp .tmux.conf ..
 cp  vim/.vimrc ..
 cp -r vim/* ../.vim/
-cp .clang-format ..
+cp cpp/.clang-format ..
 
 #general package installations
 sudo apt install curl cmake g++-14 libpython3-dev libpcre3-dev clang-format
@@ -25,7 +25,6 @@ cd ~/.vim/plugged/You*
 #LaTeX
 sudo apt install texlive-bibtex-extra texlive-lang-cyrillic texlive-latex-extra latexmk biber texlive-luatex fonts-cmu
 
-exit
 cd
 git clone https://github.com/stefanhepp/pplatex
 cd pplatex

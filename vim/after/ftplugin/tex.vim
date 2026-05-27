@@ -2,7 +2,7 @@ setlocal spell spelllang=ru,en_us
 
 set textwidth=80
 let g:asyncrun_save = 1
-let g:pdf_viewer = "evince"
+let g:pdf_viewer = "zathura"
 
 " Error format as copy-pasted from vimtex plugin
 
@@ -69,17 +69,20 @@ function! OpenPdf(name)
 	endif
 endfunction
 
-function! LatexMake()
+function! LatexMake(arg)
 	cclose
 	if filereadable("main.tex")
-		AsyncRun -post=call\ OpenPdf("main.pdf") latexmk main.tex
+		let tex_file = "main."
 	else
-		AsyncRun -post=call\ OpenPdf("%:p:r.pdf") latexmk >/dev/null 2>&1 || pplatex -i %:h/build/%:r.log
+		let tex_file = "%:r"
 	endif
+	let cmd_start = 'AsyncRun -post=call\ OpenPdf("' . tex_file . '.pdf") latexmk ' . tex_file . '.tex '
+	let cmd_end = ' >/dev/null 2>&1 || pplatex -i %:h/build/' . tex_file . '.log'
+	exe cmd_start . a:arg . cmd_end
 endfunction
 
-command LM :call LatexMake()
-command LMP :AsyncRun -cwd=$(VIM_FILEDIR) latexmk -pdf
+command LM :call LatexMake("")
+command LMP :call LatexMake("-pdf")
 
 let g:Tex_Env_frame="
 	\\\begin{frame}[fragile]\<CR>

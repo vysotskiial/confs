@@ -19,18 +19,20 @@ Plug 'google/vim-codefmt'
 Plug 'google/vim-glaive'
 
 Plug 'christoomey/vim-tmux-navigator'
-
+Plug 'jpalardy/vim-slime', { 'for': 'python' }
+Plug 'hanschen/vim-ipython-cell', { 'for': 'python' }
 call plug#end()
 
 "Plugin settings
 let g:XkbSwitchEnabled=1
 let g:XkbSwitchLib="/usr/local/lib/libxkbswitch.so"
+let g:tmux_navigator_no_mappings=1
 let g:Tex_Leader=';'
 let g:Tex_FoldedSections="Section"
 let g:Tex_FoldedEnvironments=""
 let g:Tex_FoldedMisc=""
 let g:tex_flavor='latex'
-let g:tmux_navigator_no_mappings=1
+
 nnoremap <silent> <C-F>h :<C-U>TmuxNavigateLeft<cr>
 nnoremap <silent> <C-F>j :<C-U>TmuxNavigateDown<cr>
 nnoremap <silent> <C-F>k :<C-U>TmuxNavigateUp<cr>
@@ -56,6 +58,7 @@ set mouse=a
 set termguicolors
 colo desert
 set number
+set relativenumber
 set gcr=a:blinkon0-Visual,i-ci:blinkon0-ver25
 syn on
 hi Normal guibg=gray19
@@ -80,6 +83,8 @@ hi SpellCap cterm=undercurl
 hi Statement cterm=bold
 hi! link Identifier Normal
 hi Type cterm=bold
+hi! cmakeCommand guifg=darkkhaki
+
 "Tabs
 set tabstop=2
 set shiftwidth=2
@@ -112,7 +117,9 @@ set nofoldenable
 " clipboard
 set clipboard=unnamedplus
 nnoremap dd "_dd
+nnoremap d "_d
 nnoremap x "_x
+nnoremap c "_c
 " GUI
 set go=aei
 " Ycm
