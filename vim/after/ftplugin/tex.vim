@@ -4,6 +4,10 @@ set textwidth=80
 let g:asyncrun_save = 1
 let g:pdf_viewer = "zathura"
 
+if empty(v:servername)
+	call remote_startserver('Latex')
+endif
+
 " Error format as copy-pasted from vimtex plugin
 
 " Each new item starts with two asterics followed by the file, potentially
@@ -40,6 +44,7 @@ setlocal errorformat+=%W**\ Warning\ in\ %f:%m
 setlocal errorformat+=%W**\ Warning:\ %m\ on\ input\ line\ %#%l.
 setlocal errorformat+=%W**\ Warning:\ \ %m
 setlocal errorformat+=%W**\ Warning:\ %m
+" Trailing whitespace below is there for a reason, don't touch
 setlocal errorformat+=%W**\ Warning:\ 
 
 " Some errors are difficult even for pplatex
@@ -69,16 +74,29 @@ function! OpenPdf(name)
 	endif
 endfunction
 
+function! CompiledFile()
+	if filereadable(expand("%:p:h") . "/main.tex")
+		let tex_file = "main"
+	else
+		let tex_file = expand("%:r")
+	endif
+	return tex_file
+endfunction
+
 function! LatexMake(arg)
 	cclose
-	if filereadable("main.tex")
-		let tex_file = "main."
-	else
-		let tex_file = "%:r"
-	endif
-	let cmd_start = 'AsyncRun -post=call\ OpenPdf("' . tex_file . '.pdf") latexmk ' . tex_file . '.tex '
-	let cmd_end = ' >/dev/null 2>&1 || pplatex -i %:h/build/' . tex_file . '.log'
+	let compiled_file = CompiledFile()
+	let cmd_start = 'AsyncRun -post=call\ OpenPdf("' . compiled_file . '.pdf") latexmk -synctex=1 ' . compiled_file . '.tex '
+	let cmd_end = ' >/dev/null 2>&1 || pplatex -i %:p:h/build/' . compiled_file . '.log'
 	exe cmd_start . a:arg . cmd_end
+endfunction
+
+nnoremap <Bslash>s :call ForwardSearch()<CR>
+
+function! ForwardSearch()
+	let compiled_file = CompiledFile()
+	exe "silent !zathura --synctex-forward " . line('.') . ":" . col('.') . ":" . expand('%:p') . " " . compiled_file . ".pdf &"
+	redr!
 endfunction
 
 command LM :call LatexMake("")

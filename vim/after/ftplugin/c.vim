@@ -1,12 +1,13 @@
 let g:cpp_class_scope_highlight=1
+let g:ycm_confirm_extra_conf = 0
 AutoFormatBuffer clang-format
 set fo-=cro
 
 command CM :AsyncRun -cwd=<root> cmake --build build
-hi cCustomClassName gui=bold term=bold guifg=darkkhaki
-hi cCustomClass gui=bold term=bold guifg=darkkhaki
+hi cCustomClassName gui=bold term=bold cterm=bold guifg=darkkhaki
+hi cCustomClass gui=bold term=bold cterm=bold guifg=darkkhaki
 hi cppSTLconstant guifg=navajowhite
-hi cppSTLnamespace gui=bold term=bold guifg=darkkhaki
+hi cppSTLnamespace gui=bold term=bold cterm=bold guifg=darkkhaki
 hi cppSTLios guifg=navajowhite
 hi cIncluded guifg=#ffa0a0
 nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
