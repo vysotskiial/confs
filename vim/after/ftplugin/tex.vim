@@ -2,7 +2,7 @@ setlocal spell spelllang=ru,en_us
 
 set textwidth=80
 let g:asyncrun_save = 1
-let g:pdf_viewer = "zathura"
+let g:pdf_viewer = "okular --unique" "zathura
 
 if empty(v:servername)
 	call remote_startserver('Latex')
@@ -95,7 +95,12 @@ nnoremap <Bslash>s :call ForwardSearch()<CR>
 
 function! ForwardSearch()
 	let compiled_file = CompiledFile()
-	exe "silent !zathura --synctex-forward " . line('.') . ":" . col('.') . ":" . expand('%:p') . " " . compiled_file . ".pdf &"
+	if (g:pdf_viewer ==# "zathura")
+		exe "silent !zathura --synctex-forward " . line('.') . ":" . col('.') . ":" . expand('%:p') . " " . compiled_file . ".pdf &"
+	endif
+	if (g:pdf_viewer ==# "okular --unique")
+		exe "silent !okular --unique " . expand('%:p:h') . "/" . compiled_file . ".pdf\\#src:" . line('.') . expand('%:p') . "& 2>/dev/null"
+	endif
 	redr!
 endfunction
 
