@@ -91,16 +91,18 @@ function! LatexMake(arg)
 	exe cmd_start . a:arg . cmd_end
 endfunction
 
-nnoremap <Bslash>s :call ForwardSearch()<CR>
+nnoremap <Bslash>s :call ForwardSearch(line('.'))<CR>
+nnoremap <C-LeftMouse> :call ForwardSearch(getmousepos().line)<CR>
 
-function! ForwardSearch()
+function! ForwardSearch(line)
 	let compiled_file = CompiledFile()
 	if (g:pdf_viewer ==# "zathura")
-		exe "silent !zathura --synctex-forward " . line('.') . ":" . col('.') . ":" . expand('%:p') . " " . compiled_file . ".pdf &"
+		exe "silent !zathura --synctex-forward " . a:line . ":1:" . expand('%:p') . " " . compiled_file . ".pdf &"
 	endif
 	if (g:pdf_viewer ==# "okular --unique")
-		exe "silent !okular --unique " . expand('%:p:h') . "/" . compiled_file . ".pdf\\#src:" . line('.') . expand('%:p') . "& 2>/dev/null"
+		exe "silent !okular --unique " . expand('%:p:h') . "/" . compiled_file . ".pdf\\#src:" . a:line . expand('%:p') . "& 2>/dev/null"
 	endif
+	exe a:line
 	redr!
 endfunction
 
