@@ -21,6 +21,7 @@ Plug 'google/vim-glaive'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'jpalardy/vim-slime', { 'for': 'python' }
 Plug 'hanschen/vim-ipython-cell', { 'for': 'python' }
+Plug 'tpope/vim-fugitive'
 call plug#end()
 
 "Plugin settings
@@ -33,6 +34,10 @@ let g:Tex_FoldedEnvironments=""
 let g:Tex_FoldedMisc=""
 let g:tex_flavor='latex'
 
+"Status line
+set laststatus=2
+
+"Tmux integration
 nnoremap <silent> <C-F>h :<C-U>TmuxNavigateLeft<cr>
 nnoremap <silent> <C-F>j :<C-U>TmuxNavigateDown<cr>
 nnoremap <silent> <C-F>k :<C-U>TmuxNavigateUp<cr>
@@ -101,6 +106,10 @@ nnoremap j gj
 nnoremap k gk
 vnoremap j gj
 vnoremap k gk
+nnoremap <Down> g<Down>
+nnoremap <Up> g<Up>
+vnoremap <Down> g<Down>
+vnoremap <Up> g<Up>
 vnoremap <C-l> <Esc>
 inoremap <C-l> <Esc>
 cnoremap <C-l> <Esc>
