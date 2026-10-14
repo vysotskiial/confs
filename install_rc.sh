@@ -9,10 +9,10 @@ cp -r vim/* ../.vim/
 cp cpp/.clang-format ..
 
 #general package installations
-sudo apt install curl cmake g++-14 libpython3-dev libpcre3-dev clang-format
-sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-14 100
+sudo apt install curl cmake g++-15 libpython3-dev libpcre3-dev clang-format
+sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-15 100
 sudo update-alternatives --install /usr/bin/cc cc /usr/bin/gcc 100
-sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-14 100
+sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-15 100
 sudo update-alternatives --install /usr/bin/c++ c++ /usr/bin/g++ 100
 
 #VIM

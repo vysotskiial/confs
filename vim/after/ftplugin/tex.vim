@@ -109,6 +109,25 @@ endfunction
 command LM :call LatexMake("")
 command LMP :call LatexMake("-pdf")
 
+function! Tex_Completion(cmd)
+	let str = "\ " . a:cmd . "\<Esc>:call Tex_Complete('default', 'text')\<CR>"
+	call IMAP(a:cmd, str, 'tex')
+endfunction
+
+call Tex_Completion('\cite{')
+call Tex_Completion('\ref{')
+call Tex_Completion('\eqref{')
+
+inoremap <buffer> <expr> , TexRefComma()
+
+function! TexRefComma() abort
+	let groups = map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+	if index(groups, 'texCite') >= 0 || index(groups, 'refZone') >= 0
+		return ",\<Esc>:call Tex_Complete('default', 'text')\<CR>"
+	endif
+	return ','
+endfunction
+
 let g:Tex_Env_frame="
 	\\\begin{frame}[fragile]\<CR>
 	\\\frametitle{<++>}\<CR>
