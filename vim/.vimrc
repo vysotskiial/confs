@@ -4,7 +4,7 @@ call plug#begin()
 
 Plug 'ycm-core/YouCompleteMe'
 
-Plug 'vim-latex/vim-latex'
+Plug 'vim-latex/vim-latex', { 'do': 'git apply --reverse --check ~/.vim/patches/latex-suite.patch' }
 
 Plug 'lyokha/vim-xkbswitch'
 

@@ -1,0 +1,16 @@
+diff --git a/ftplugin/latex-suite/texviewer.vim b/ftplugin/latex-suite/texviewer.vim
+index 42b3b29..de267f9 100644
+--- a/ftplugin/latex-suite/texviewer.vim
++++ b/ftplugin/latex-suite/texviewer.vim
+@@ -223,11 +223,6 @@ function! Tex_CompleteWord(completeword, prefixlength)
+ 	else
+ 		exe 'normal! a'.a:completeword."\<Esc>"
+ 	endif
+-
+-	if getline('.')[col('.')-1] !~ '{' && getline('.')[col('.')] !~ '}'
+-		exe "normal! a}\<Esc>"
+-	endif
+-	
+ 	" Return to Insert mode
+ 	call Tex_SwitchToInsertMode()
+ endfunction " }}}
